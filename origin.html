@@ -28,8 +28,9 @@
   map.addOverlay(mk);
   map.panTo(r.point);
   }
-  var myGeo = new BMap.Geocoder();   
   var x=document.getElementById("address");
+  var myGeo = new BMap.Geocoder();   
+  
   var start =  myGeo.getLocation(new BMap.Point(r.point.lng, r.point.lat),function(result){
       	if(result){
 		x.innerText=result.address;
