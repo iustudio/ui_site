@@ -19,6 +19,7 @@
   // 百度地图API功能
   var map = new BMap.Map("allmap");
   var point = new BMap.Point(116.331398,39.897445);
+ var x=document.getElementById("address");
   map.centerAndZoom(point,12);
 
   var geolocation = new BMap.Geolocation();
@@ -33,11 +34,15 @@
 	var start =  myGeo.getLocation(new BMap.Point(r.point.lng, r.point.lat),function(result){
       	if(result){
 
-		var x=document.getElementById("address");
+	
 		x.innerText=result.address;
           
       		}
-   	 });		
+   	 });
+  function getlocation()
+  {
+  	
+  }
   },{enableHighAccuracy: true})
   //关于状态码
   //BMAP_STATUS_SUCCESS	检索成功。对应数值“0”。
@@ -51,5 +56,6 @@
   //BMAP_STATUS_TIMEOUT	超时。对应数值“8”。(自 1.1 新增)
 </script>
     <p id="address">正在获取地址信息...</p>
+    <button onclick="getLocation()">试一下</button>
   </body>
 </html>
