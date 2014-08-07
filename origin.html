@@ -13,7 +13,8 @@
   </head>
   <body>
     <div id="allmap"></div>
-
+	<p id="address">正在获取地址信息...</p>
+   
 <script type="text/javascript">
 
   // 百度地图API功能
@@ -39,10 +40,7 @@
           
       		}
    	 });
-  function getlocation()
-  {
-  	
-  }
+  
   },{enableHighAccuracy: true})
   //关于状态码
   //BMAP_STATUS_SUCCESS	检索成功。对应数值“0”。
@@ -55,7 +53,6 @@
   //BMAP_STATUS_SERVICE_UNAVAILABLE	服务不可用。对应数值“7”。(自 1.1 新增)
   //BMAP_STATUS_TIMEOUT	超时。对应数值“8”。(自 1.1 新增)
 </script>
-    <p id="address">正在获取地址信息...</p>
-    <button onclick="getLocation()">试一下</button>
+    
   </body>
 </html>
