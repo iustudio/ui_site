@@ -4,9 +4,7 @@
  <META http-equiv="X-UA-Compatible" content="IE=10" > </META>
 <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
 <style type="text/css">
-body, html {width: 100%;height: 100%;overflow: hidden;margin:0;}
-#allmap{height:100%;width:78%;float:left;border-right:2px solid #bcbcbc;}
-#r-result{height:100%;width:20%;float:left;}
+body, html,#allmap {width: 100%;height: 100%;overflow: hidden;margin:0;}
 </style>
  <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=wOnUASxqPh72H50ayGMI7Lum"></script> 
 
@@ -14,7 +12,6 @@ body, html {width: 100%;height: 100%;overflow: hidden;margin:0;}
 </head>
 <body>
 <div id="allmap"></div>
-<div id="r-result"></div>
 </body>
 </html>
 <script type="text/javascript">
@@ -23,21 +20,21 @@ body, html {width: 100%;height: 100%;overflow: hidden;margin:0;}
 var map = new BMap.Map("allmap");
 var point = new BMap.Point(116.331398,39.897445);
 map.centerAndZoom(point,12);
-map.enableScrollWheelZoom(); 
+map.enableScrollWheelZoom();
 var geolocation = new BMap.Geolocation();
   geolocation.getCurrentPosition(function(r){
   if(this.getStatus() == BMAP_STATUS_SUCCESS){
   var mk = new BMap.Marker(r.point);
   map.addOverlay(mk);
   map.panTo(r.point);
-  //var end= prompt("请问你要去哪儿了 ?")
-  var end = "电子科技大学";
+ // var end= prompt("请问你要去哪儿了 ?")
+ var end = "电子科技大学";
  var myGeo = new BMap.Geocoder();    
 // 根据坐标得到地址描述  
     var start =  myGeo.getLocation(new BMap.Point(r.point.lng, r.point.lat),function(result){
       if(result){
-        var walking = new BMap.WalkingRoute(map, {renderOptions:{map: map,panel: "r-result ", autoViewport: true}});   
-       walking.search( "成都大学", end);
+        var walking = new BMap.WalkingRoute(map, {renderOptions:{map: map, autoViewport: true}});   
+       walking.search( result.address, end);
       }
     });
  }
