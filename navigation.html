@@ -34,7 +34,7 @@ var geolocation = new BMap.Geolocation();
     var start =  myGeo.getLocation(new BMap.Point(r.point.lng, r.point.lat),function(result){
       if(result){
         var walking = new BMap.WalkingRoute(map, {renderOptions:{map: map, autoViewport: true}});   
-       walking.search( result.address, end);
+       walking.search( r.point, end);
       }
     });
  }
