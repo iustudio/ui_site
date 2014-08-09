@@ -46,13 +46,13 @@ transit.setSearchCompleteCallback(function(results){
     }
     	document.getElementById("r-result").innerHTML = s.join("<br/>");
 	
-	var ForWriting =2;
+//	var ForWriting =2;
 
-	var writeFile = fso.openTextFile("d:\\bus_result.txt",ForWriting);
+//	var writeFile = fso.openTextFile("d:\\bus_result.txt",ForWriting);
 	
-	writeFile.write( document.getElementById("r-result").innerText);
+//	writeFile.write( document.getElementById("r-result").innerText);
        
-	writeFile.close();
+//	writeFile.close();
   }
 })
 transit.search("电子科技大学", "天府广场");
