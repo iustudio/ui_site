@@ -20,7 +20,8 @@ body, html,#allmap {width: 100%;height: 100%;overflow: hidden;margin:0;}
 var map = new BMap.Map("allmap");
 var point = new BMap.Point(116.331398,39.897445);
 map.centerAndZoom(point,12);
-map.enableScrollWheelZoom();
+map.enableScrollWheelZoom();// 启用滚轮放大缩小，默认禁用
+map.enableContinuousZoom();  //启用地图惯性拖拽，默认禁用
 var geolocation = new BMap.Geolocation();
   geolocation.getCurrentPosition(function(r){
   if(this.getStatus() == BMAP_STATUS_SUCCESS){
@@ -34,7 +35,7 @@ var geolocation = new BMap.Geolocation();
     var start =  myGeo.getLocation(new BMap.Point(r.point.lng, r.point.lat),function(result){
       if(result){
         var walking = new BMap.WalkingRoute(map, {renderOptions:{map: map, autoViewport: true}});   
-       walking.search( mk, end);
+       walking.search( result.address, end);
       }
     });
  }
