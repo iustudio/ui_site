@@ -13,7 +13,7 @@
   </head>
   <body>
     <div id="allmap"></div>
-    <p id="address">点击这个按钮，获得您的坐标：</p>
+    <p id="address"></p>
   </body>
 </html>
 <script type="text/javascript">
@@ -35,8 +35,9 @@
 	var start =  myGeo.getLocation(new BMap.Point(r.point.lng, r.point.lat),function(result){
       	if(result){
 
-		var x=document.getElementById("address");
-		x.innerHTML=result.address;
+		//var x=document.getElementById("address");
+		//x.innerHTML=result.address;
+		document.getElementById("address").innerHTML = result.address;
           
       		}
    	 });		
