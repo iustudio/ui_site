@@ -9,7 +9,7 @@
     #r-result{height:100%;width:20%;float:left;}
     </style>
     <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=wOnUASxqPh72H50ayGMI7Lum"></script>
-    <title>浏览器定位</title>
+    <title>导航</title>
   </head>
   <body>
     <div id="allmap"></div>
@@ -17,7 +17,6 @@
   </body>
 </html>
 <script type="text/javascript">
-
  function display(origin,destination){
   var map = new BMap.Map("allmap");
   var origin;
@@ -41,15 +40,10 @@
       }
     });
  }
-  
- 
   },{enableHighAccuracy: true})
-  
   }
   function GetInfo()
   {
      return  document.getElementById("r-result").innerText;
   }
 </script>
-
-
