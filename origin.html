@@ -28,8 +28,25 @@
   map.centerAndZoom(point, 12);
   map.enableScrollWheelZoom();// 启用滚轮放大缩小，默认禁用
   map.enableContinuousZoom();  //启用地图惯性拖拽，默认禁用
-  var walking = new BMap.WalkingRoute(map, {renderOptions:{map: map,panel: "r-result", autoViewport: true}});
-  walking.search(origin, destination);
+  var geolocation = new BMap.Geolocation();
+  geolocation.getCurrentPosition(function(r){
+  if(this.getStatus() == BMAP_STATUS_SUCCESS){
+  var mk = new BMap.Marker(r.point);
+  map.addOverlay(mk);
+  map.panTo(r.point);
+ var myGeo = new BMap.Geocoder();    
+// 根据坐标得到地址描述  
+    var start =  myGeo.getLocation(new BMap.Point(r.point.lng, r.point.lat),function(result){
+      if(result){
+        var walking = new BMap.WalkingRoute(map, {renderOptions:{map: map,  panel: "r-result",autoViewport: true}});   
+       walking.search( result.address, destination);
+      }
+    });
+ }
+  
+ 
+  },{enableHighAccuracy: true})
+  
   }
   function GetInfo()
   {
