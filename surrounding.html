@@ -17,23 +17,15 @@ body, html,#allmap {width: 100%;height: 100%;overflow: hidden;margin:0;}
 <div id="r-result"></div>
 <script type="text/javascript" lang = "javascript">
 
-
+function SurroundingParameter(params)
+{
 // 百度地图API功能
+var params;
 var map = new BMap.Map("l-map");
 var point = new BMap.Point(116.331398,39.897445);
 map.centerAndZoom(point,39);
-
 map.enableScrollWheelZoom();    //启用滚轮放大缩小，默认禁用
 map.enableContinuousZoom();    //启用地图惯性拖拽，默认禁用
-
-var fso, ts, s ; 
-//var ForReading = 1;
-//fso = new ActiveXObject("Scripting.FileSystemObject"); 
-//ts = fso.OpenTextFile("d:\\test.txt", ForReading); 
-//s = ts.ReadAll(); 
-//var myValue=s;
-//ts.close();
-
 var geolocation = new BMap.Geolocation();
 geolocation.getCurrentPosition(function(r){
     if(this.getStatus() == BMAP_STATUS_SUCCESS){
@@ -41,23 +33,15 @@ geolocation.getCurrentPosition(function(r){
         map.addOverlay(mk);
         map.panTo(r.point);
         var local = new BMap.LocalSearch(map, {renderOptions:{map: map, panel: "r-result",autoViewport: true}});
-        local.searchNearby("购物",r.point,1000);
-       //将结果数据添加到本地文件内，还未实现
-//	var ForWriting =2;
-
-//	var writeFile = fso.openTextFile("d:\\result.txt",ForWriting);
-	
-//	writeFile.write("local.getResults");
+        local.searchNearby(params,r.point,1000);
        
-//	writeFile.close();
-	
-    	
-
-	
-	
     }        
 },{enableHighAccuracy: true})
-
+}
+function GetInfo()
+  {
+     return  document.getElementById("r-result").innerText;
+  }
 	
 //关于状态码
 //BMAP_STATUS_SUCCESS	检索成功。对应数值“0”。
