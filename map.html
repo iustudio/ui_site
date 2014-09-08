@@ -1,56 +1,79 @@
 <html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
- <META http-equiv="X-UA-Compatible" content="IE=10" > </META>
-<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
-<style type="text/css">
-body, html,#allmap {width: 100%;height: 100%;overflow: hidden;margin:0;}
-</style>
- <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=wOnUASxqPh72H50ayGMI7Lum"></script> 
-
-<title>步行导航检索</title>
-</head>
-<body>
-<div id="allmap"></div>
-</body>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <META http-equiv="X-UA-Compatible" content="IE=9" > </META>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <style type="text/css">
+     body, html {width: 100%;height: 100%;overflow: hidden;margin:0;}
+    #allmap{height:100%;width:78%;float:left;border-right:2px solid #bcbcbc;}
+    #r-result{height:100%;width:20%;float:left;}
+    </style>
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=wOnUASxqPh72H50ayGMI7Lum"></script>
+    <title>导航</title>
+  </head>
+  <body>
+    <div id="allmap"></div>
+    <div id="r-result"></div>
+    <div id="p-result"></div>
+  </body>
 </html>
 <script type="text/javascript">
-
-// 百度地图API功能
-var map = new BMap.Map("allmap");
-var point = new BMap.Point(116.331398,39.897445);
-map.centerAndZoom(point,12);
-map.enableScrollWheelZoom();// 启用滚轮放大缩小，默认禁用
-map.enableContinuousZoom();  //启用地图惯性拖拽，默认禁用
-var geolocation = new BMap.Geolocation();
+ function BusDisplay(destination){
+  var map = new BMap.Map("allmap");
+  var destination;
+  var point = new BMap.Point(116.331398,39.897445);
+  map.centerAndZoom(point, 12);
+  map.enableScrollWheelZoom();// 启用滚轮放大缩小，默认禁用
+  map.enableContinuousZoom();  //启用地图惯性拖拽，默认禁用
+  var geolocation = new BMap.Geolocation();
   geolocation.getCurrentPosition(function(r){
   if(this.getStatus() == BMAP_STATUS_SUCCESS){
   var mk = new BMap.Marker(r.point);
   map.addOverlay(mk);
   map.panTo(r.point);
- // var end= prompt("请问你要去哪儿了 ?")
- var end = "电子科技大学";
  var myGeo = new BMap.Geocoder();    
 // 根据坐标得到地址描述  
     var start =  myGeo.getLocation(new BMap.Point(r.point.lng, r.point.lat),function(result){
       if(result){
-        var walking = new BMap.WalkingRoute(map, {renderOptions:{map: map, autoViewport: true}});   
-       walking.search( result.address, end);
+        var transit = new BMap.TransitRoute(map, {renderOptions: {map: map, panel: "p-result",autoViewport: true}});
+       transit.search( result.address, destination);
       }
     });
  }
-  
- 
   },{enableHighAccuracy: true})
-    //关于状态码
-  //BMAP_STATUS_SUCCESS	检索成功。对应数值“0”。
-  //BMAP_STATUS_CITY_LIST	城市列表。对应数值“1”。
-  //BMAP_STATUS_UNKNOWN_LOCATION	位置结果未知。对应数值“2”。
-  //BMAP_STATUS_UNKNOWN_ROUTE	导航结果未知。对应数值“3”。
-  //BMAP_STATUS_INVALID_KEY	非法密钥。对应数值“4”。
-  //BMAP_STATUS_INVALID_REQUEST	非法请求。对应数值“5”。
-  //BMAP_STATUS_PERMISSION_DENIED	没有权限。对应数值“6”。(自 1.1 新增)
-  //BMAP_STATUS_SERVICE_UNAVAILABLE	服务不可用。对应数值“7”。(自 1.1 新增)
-  //BMAP_STATUS_TIMEOUT	超时。对应数值“8”。(自 1.1 新增)
-
+  }
+  
+   function WalkingDisplay(destination){
+  var map = new BMap.Map("allmap");
+  var destination;
+  var point = new BMap.Point(116.331398,39.897445);
+  map.centerAndZoom(point, 12);
+  map.enableScrollWheelZoom();// 启用滚轮放大缩小，默认禁用
+  map.enableContinuousZoom();  //启用地图惯性拖拽，默认禁用
+  var geolocation = new BMap.Geolocation();
+  geolocation.getCurrentPosition(function(r){
+  if(this.getStatus() == BMAP_STATUS_SUCCESS){
+  var mk = new BMap.Marker(r.point);
+  map.addOverlay(mk);
+  map.panTo(r.point);
+ var myGeo = new BMap.Geocoder();    
+// 根据坐标得到地址描述  
+    var start =  myGeo.getLocation(new BMap.Point(r.point.lng, r.point.lat),function(result){
+      if(result){
+        var walking = new BMap.WalkingRoute(map, {renderOptions:{map: map,  panel: "r-result",autoViewport: true}});   
+       walking.search( result.address, destination);
+      }
+    });
+ }
+  },{enableHighAccuracy: true})
+  }
+  
+  function GetWailkInfo()
+  {
+     return  document.getElementById("r-result").innerText;
+  }
+  function GetBusInfo()
+  {
+     return  document.getElementById("p-result").innerText;
+  }
 </script>
