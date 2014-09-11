@@ -28,7 +28,7 @@ var geolocation = new BMap.Geolocation();
   var mk = new BMap.Marker(r.point);
   map.addOverlay(mk);
   map.panTo(r.point);
- var end = "天府广场";
+ var end = "文化宫";
  var myGeo = new BMap.Geocoder();    
 // 根据坐标得到地址描述  
     var start =  myGeo.getLocation(new BMap.Point(r.point.lng, r.point.lat),function(result){
