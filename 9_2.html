@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width" />
+		<title>计算∑N!</title>
+		<script type="text/javascript" charset="utf-8">
+			function calculation(){
+				var val=Number(document.getElementById("n1").value);
+				var res=0;
+				for (var i = val; i>0 ;i--) {
+				  var n1=1;
+					for (var j = i;j>0 ; j--) {
+						n1 *=j;
+					}
+					res += n1;
+				}
+				document.getElementById("n2").value=res;
+			}
+			function myclear(){
+				document.getElementById("n1").value="";
+				document.getElementById("n2").value="";
+			}
+		</script>
+	</head>
+	<body>
+		<h2>计算∑N!</h2>
+		输入整数N的值：<input type="text" name="n1" id="n1" value="" /> <br />
+		∑N! = <input type="text" name="n2" id="n2" value="" /><br />
+		<button  type="submit" onclick="calculation()">计算∑N!</button>
+		<button  type="submit" onclick="myclear()">清空</button>
+	</body>
+</html>

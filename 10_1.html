@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width" />
+		<title>表单数据验证</title>
+		<script type="text/javascript" charset="utf-8">
+			function checkUserName(usernameNode){
+				var username = usernameNode.value; 
+				var username_format= username.match(/^[a-zA-Z]/); 
+				if (username ==null || username=="") {
+					document.getElementById("username-error").innerHTML="用户名不能为空!";
+					return false;
+				}
+				else if (username_format==null) {
+					document.getElementById("username-error").innerHTML="用户名必须以字母开头!";
+					return false;
+				}
+				else{
+					return true;
+				}
+			}
+			function checkPassword(passwordNode){
+				var pwd = passwordNode.value; 
+				if (pwd ==null || pwd =="") {
+					document.getElementById("pwd-error").innerHTML="密码不能为空!";
+					return false;
+				}
+				else{
+          password=pwd;
+					return true;
+				}
+			}
+			function checkPwd_confirm(pwd_confirmNode){
+				var pwd_onfirm = pwd_confirmNode.value; 
+				if (password != pwd_confirm) {
+					document.getElementById("pwd_confirm-error").innerHTML="与密码不一样!";
+					return false;
+				}
+				else{
+					return true;
+				}
+			}
+			function checkEmail(emailNode){
+				var email = emailNode.value; 
+				var email_format=email.match(/\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i);
+				if (email ==null || email=="") {
+					document.getElementById("email-error").innerHTML="电子邮箱不能为空!";
+					return false;
+				}
+				else if(email_format==null) {
+					document.getElementById("email-error").innerHTML="电子邮箱格式不对!";
+					return false;
+				}
+				else{
+					return true;
+				}
+			}
+			function validates(){
+				var form = document.forms[0];
+				if(checkUserName(form.username) && checkPassword(form.pwd) && checkPwd_confirm(form.pwd_confirm) &&checkEmail(form.email)){
+					return true;
+				}
+				else{
+					alert("表单填写不正确，提交失败！");
+					return false;
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<h2>表单验证</h2>
+		<form  method="post" onsubmit="return validates();" >
+			用户名： <input type="text" name="username" id="username" value="" onBlur="checkUserName(this)" /> 
+			<div id="username-error" style="color:red">
+			</div>
+			密码： <input type="password" name="pwd" id="pwd" value="" onBlur="checkPassword(this)" />
+			<div id="pwd-error" style="color:red">
+			</div>
+			确认密码： <input type="password" name="pwd_confirm" id="pwd_confirm" value="" onBlur="checkPwd_confirm(this)"/>
+			<div id="pwd_confirm-error" style="color:red">
+			</div>
+			电子邮件： <input type="text" name="email" id="email" value="" onBlur="checkEmail(this)"/>
+			<div id="email-error" style="color:red">
+			</div>
+			<input  type="submit" value="提交">
+			<input  type="reset" value="重置">
+		</form><br />
+	</body>
+</html>

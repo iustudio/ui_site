@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>成绩百分制转换为五分制</title>
+		<script type="text/javascript" charset="utf-8">
+			function judge(){
+				var num = prompt("请输入你的成绩：");
+				if (num!=null && num != "") {
+					var score = Number(num);
+					if (0 <= score && score<40) {
+						var res="成绩等级为极差";
+					}
+					if ( 40<= score && score<60) {
+						var res="成绩等级为差";
+					}
+					if (60 <= score && score<75) {
+						var res="成绩等级为中等";
+					}
+					if (75<= score && score<=90) {
+						var res="成绩等级为良";
+					}
+					if (90 < score && score<=100) {
+						var res="成绩等级为优秀";
+					}
+					alert(res);
+					document.getElementById("res").innerHTML=res;
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<h2>课程成绩评定</h2>
+		<h2 id="res"></h2>
+		<button id="judge" type="submit" onclick="judge()">开始评定</button>
+	</body>
+</html>
